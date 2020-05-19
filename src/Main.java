@@ -11,8 +11,10 @@ public class Main{
 	public static void main(String args[]){
 
 		DiGraph grafo = new DiGraph();
+		Matriz mat = new Matriz();
+		Floyd fl = new Floyd();
 
-		int distancia = 0;
+		int distancia = 0; 
 		String line = "";
 		try{
 				Scanner reader = new Scanner(new File("guategrafo.txt"));
@@ -25,7 +27,10 @@ public class Main{
 				grafo.add(parts[0], parts[1], distancia);
 			}
 
-			System.out.println("El grafo ha sido ingresado");
+			System.out.println("El grafo ha sido ingresado\n");
+
+			long myAdy[][] = mat.crearMatriz(grafo);
+			System.out.println("\n"+fl.shortestPath(myAdy));
 
 
 		}

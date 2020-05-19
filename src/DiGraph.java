@@ -1,5 +1,6 @@
 /* Martin Amado */
 /* 19020 */
+/* DiGraph.java */
 /* Extraido de: https://gist.github.com/snarkbait/9ff6fffe423b220c8890 */
 
 /* Generic Directed Weighted Graph with Dijkstra's Shortest Path Algorithm
@@ -41,6 +42,15 @@ public class DiGraph<T extends Comparable<T>>
 		vertices = new ArrayList<>();
 		edges = new ArrayList<>();
 	}
+
+	public ArrayList<String> getVertex(){
+		ArrayList<String> a = new ArrayList<String>();
+		for(int i=0; i< vertices.size();i++){
+			a.add(vertices.get(i).value.toString());
+		}
+		return a;
+	}
+
 
 	/**
 	 * Creates Edge from two values T directed from -- to
@@ -105,7 +115,7 @@ public class DiGraph<T extends Comparable<T>>
 	 * @param to to value of type T
 	 * @return Edge, or <code>null</code> if not found.
 	 */
-	private Edge findEdge(T from, T to)
+	public Edge findEdge(T from, T to)
 	{
 		for (Edge each : edges)
 		{
@@ -115,6 +125,15 @@ public class DiGraph<T extends Comparable<T>>
 			}
 		}
 		return null;
+	}
+
+	public int findValue(T from, T to){
+		for(Edge each : edges){
+			if(each.from.value.equals(from) && each.to.value.equals(to)){
+				return each.cost;
+			}
+		}
+		return 999999999;
 	}
 
 	/**
