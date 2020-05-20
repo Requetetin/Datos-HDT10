@@ -6,12 +6,12 @@
 import java.util.*;
 
 public class Matriz{
+	long matriz[][];
+	int tamano;
 	public long [] [] crearMatriz(DiGraph d){
 		long mAdy[][] = new long [d.getVertex().size()] [d.getVertex().size()];
 		ArrayList<String> vertices = d.getVertex();
-		for(int i=0; i<vertices.size(); i++){
-			System.out.println("Los vertices numerados son: "+ (i+1)+" "+vertices.get(i));
-		}
+		tamano = vertices.size();
 		for(int i=0; i<vertices.size(); i++){
 			for(int j=0; j<vertices.size();j++){
 				if(i == j){
@@ -22,16 +22,24 @@ public class Matriz{
 				}
 			}
 		}
-
-		System.out.println("\n\nLa matriz de adyacencia inicial es:");
-		for(int i=0; i<vertices.size(); i++){
-			for(int j=0; j<vertices.size();j++){
-				System.out.print("["+mAdy[i][j]+"]");
-			}
-			System.out.println();
-		}
+		matriz = mAdy;
+		
 
 
 		return mAdy;
+	}
+
+
+
+	public String showMatriz(){
+		String a = "";
+		a+="\nLa matriz de adyacencia inicial es:\n";
+		for(int i=0; i<tamano; i++){
+			for(int j=0; j<tamano;j++){
+				a+="["+matriz[i][j]+"]";
+			}
+			a+="\n";
+		}
+		return a;
 	}
 }

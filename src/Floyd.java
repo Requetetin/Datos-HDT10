@@ -2,11 +2,15 @@
 /* 19020 */
 /* Floyd.java */
 /* Encargado de recibir y separar la base de datos del txt */
-
+import java.util.*;
 public class Floyd{
-	public String shortestPath(long [] [] mAdy){
+	ArrayList<String> vertex;
+	Centro c = new Centro();
+	long matrizAdyacencia[][];
+	public String shortestPath(long [] [] mAdy, DiGraph d){
 		int vertices = mAdy.length;
-		long matrizAdyacencia[] [] = mAdy;
+		matrizAdyacencia= mAdy;
+		vertex = d.getVertex();
 
 		String caminos [] [] = new String [vertices] [vertices];
 		String caminosAuxiliares[] [] = new String [vertices] [vertices];
@@ -34,7 +38,7 @@ public class Floyd{
 						if(minimo == temporal4){
 							caminoRecorrido = "";
 							caminosAuxiliares[i][j] = k +"";
-							caminos[i][j] = caminosR(i, k, caminosAuxiliares,caminoRecorrido)+(k+1);
+							caminos[i][j] = caminosR(i, k, caminosAuxiliares,caminoRecorrido)+vertex.get(k);
 						}
 					}
 
@@ -53,17 +57,19 @@ public class Floyd{
 
 		for(i=0; i<vertices;i++){
 			for(j=0;j<vertices;j++){
-				if(matrizAdyacencia[i][j] != 1000000000){
+				if(matrizAdyacencia[i][j] != 100000000){
 					if(i!= j){
 						if(caminos[i][j].equals("")){
-							caminitos += "De ("+ (i+1)+"--->"+(j+1)+") Irse Por... ("+(i+1)+", "+(j+1)+")\n";
+							caminitos += "De ("+ vertex.get(i)+"--->"+vertex.get(j)+") Irse Por... ("+vertex.get(i)+", "+vertex.get(j)+")\n";
 						}else{
-							caminitos += "De ("+(i+1)+"--->"+(j+1)+") Irse Por...("+(i+1) +", "+caminos [i][j]+", "+(j+1)+")\n";
+
+							caminitos += "De ("+vertex.get(i)+"--->"+vertex.get(j)+") Irse Por...("+vertex.get(i) +", "+caminos [i][j]+", "+vertex.get(j)+")\n";
 						}
 					}
 				}
 			}
 		}
+		c.encontrarCentro(matrizAdyacencia, d);
 		return "La Matriz de Caminos mas cortos entre los lugares es: \n"+cadena+"\nLos diferentes caminos mas cortos entre vertices son:\n"+caminitos;
 	}
 
@@ -71,9 +77,13 @@ public class Floyd{
 			if(caminosAuxiliares[i][k].equals("")){
 			return "";
 		}else{
-			caminoRecorrido += caminosR(i, Integer.parseInt(caminosAuxiliares[i][k].toString()), caminosAuxiliares, caminoRecorrido)+ (Integer.parseInt(caminosAuxiliares[i][k].toString())+1)+", ";
+			caminoRecorrido += caminosR(i, Integer.parseInt(caminosAuxiliares[i][k].toString()), caminosAuxiliares, caminoRecorrido)+ vertex.get(Integer.parseInt(caminosAuxiliares[i][k].toString()))+", ";
 			return caminoRecorrido;
 		}
+	}
+
+	public long[][] getMatriz(){
+		return matrizAdyacencia;
 	}
 	
 }

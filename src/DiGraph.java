@@ -51,6 +51,20 @@ public class DiGraph<T extends Comparable<T>>
 		return a;
 	}
 
+	public String deleteEdge(T from, T to){
+		if(findEdge(from, to) != null){
+			
+			for(int i=0; i<edges.size();i++){
+				if(edges.get(i).from.value.equals(from) && edges.get(i).to.value.equals(to)){
+					edges.remove(i);
+					return "Se ha eliminado la conexion";
+				}
+			}
+		}
+			return "Una o ninguna ingresada ciudad no existe";
+		
+	}
+
 
 	/**
 	 * Creates Edge from two values T directed from -- to
@@ -133,7 +147,7 @@ public class DiGraph<T extends Comparable<T>>
 				return each.cost;
 			}
 		}
-		return 999999999;
+		return 99999999;
 	}
 
 	/**
