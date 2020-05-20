@@ -1,11 +1,12 @@
 /* Martin Amado */
 /* 19020 */
 /* Floyd.java */
-/* Encargado de recibir y separar la base de datos del txt */
+/* Encargado de crear la matriz de adyacencia aplicando Floyd */
+/* Extraido de: https://www.youtube.com/watch?v=xK0ShW9G-Ts&list=PLCLpAU8VN0j4RGemFfybZrWoSX57NbEq9&index=50&t=0s */
 import java.util.*;
 public class Floyd{
 	ArrayList<String> vertex;
-	Centro c = new Centro();
+	
 	long matrizAdyacencia[][];
 	public String shortestPath(long [] [] mAdy, DiGraph d){
 		int vertices = mAdy.length;
@@ -69,7 +70,7 @@ public class Floyd{
 				}
 			}
 		}
-		c.encontrarCentro(matrizAdyacencia, d);
+		
 		return "La Matriz de Caminos mas cortos entre los lugares es: \n"+cadena+"\nLos diferentes caminos mas cortos entre vertices son:\n"+caminitos;
 	}
 
